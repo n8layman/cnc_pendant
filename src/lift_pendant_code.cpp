@@ -142,22 +142,21 @@ void loop() {
   icon_sprite.drawBitmap(0, 0, cat_icon, 96, 96, Color24toRGB565(encoder_color), TFT_BLACK);
   neokey.read();
 
-  if(encoder_position>320-96) {
-    encoder_position = 320-96;
-    ss.setEncoderPosition(encoder_position);
-  }
+  // if(encoder_position>320-96) {
+  //   encoder_position = 320-96;
+  //   ss.setEncoderPosition(encoder_position);
+  // }
 
-  if(encoder_position<0) {
-    encoder_position = 0;
-    ss.setEncoderPosition(encoder_position);
-  }
+  // if(encoder_position<0) {
+  //   encoder_position = 0;
+  //   ss.setEncoderPosition(encoder_position);
+  // }
 
   encoder_color = Wheel((encoder_position) & 255);
-  icon_sprite.pushToSprite(&background_sprite, encoder_position, 0, TFT_BLACK);
-
-  icon_sprite.pushToSprite(&background_sprite, encoder_position + 100, 0, TFT_BLACK);
-
   txt_sprite.pushToSprite(&background_sprite, 20, 20, TFT_BLACK); // Push sprite to screen.
+
+  icon_sprite.pushToSprite(&background_sprite, (encoder_position % (340 + 96)) - 96, 0, TFT_BLACK);
+  icon_sprite.pushToSprite(&background_sprite, ((encoder_position + 120 + 96) % (340 + 96)) - 96, 0, TFT_BLACK);
   background_sprite.pushSprite(0, 0);
 
   // background_sprite.fillSprite(TFT_BLACK);
