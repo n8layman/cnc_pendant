@@ -4,7 +4,7 @@
 #include <Adafruit_NeoKey_1x4.h>
 #include <seesaw_neopixel.h>
 #include "Free_Fonts.h"
-#include "rabbit.h"
+#include "cat_icon.h"
 
 #include <TFT_eSPI.h> // Graphics and font library for ST7735 driver chip
 #include <SPI.h>
@@ -29,7 +29,7 @@ TFT_eSPI tft = TFT_eSPI();
 // Sprite allows us to build each frame incrementally then push to screen just once.
 TFT_eSprite background_sprite = TFT_eSprite(&tft); 
 TFT_eSprite txt_sprite = TFT_eSprite(&tft); 
-TFT_eSprite rabbit_sprite = TFT_eSprite(&tft); 
+TFT_eSprite icon_sprite = TFT_eSprite(&tft);
 
 int sda = 43;
 int scl = 44;
@@ -65,6 +65,8 @@ Adafruit_MultiNeoKey1x4 neokey((Adafruit_NeoKey_1x4 *)nk_array, Y_DIM, X_DIM/4);
 uint32_t Wheel(byte WheelPos);
 NeoKey1x4Callback blink(keyEvent evt);
 
+uint16_t Color24toRGB565(int32_t color);
+
 void setup() {
 
   Serial.begin(115200);
@@ -73,19 +75,22 @@ void setup() {
     Serial.print((char)('0' + ((buttonMode>>i)&1)));
   }
 
-  Serial.println();
-
-  // Start up TFT screen
-  pinMode(PIN_POWER_ON, OUTPUT);
-  digitalWrite(PIN_POWER_ON, HIGH);
-
   // tft.init();
   tft.init();
   tft.setRotation(1);
+  
+  // background_sprite.setColorDepth(4);
   background_sprite.createSprite(320, 240);
+
   txt_sprite.createSprite(160, 96);
-  rabbit_sprite.createSprite(96, 96);
-  rabbit_sprite.setSwapBytes(true);
+  txt_sprite.setFreeFont(FREE_FONT);
+  txt_sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  txt_sprite.drawString("LEAF", 0, 0);
+
+  // icon_sprite.setColorDepth(4);
+  icon_sprite.createSprite(96, 96);
+  // icon_sprite.setSwapBytes(true);
+  // icon_sprite.pushImage(0, 0, 31, 31, (uint16_t *)gear);
 
   // Start up i2c
   Wire.begin(sda, scl);
@@ -129,12 +134,16 @@ void setup() {
 // and encoder states should be handled with interrupts
 void loop() {
 
-  neokey.read();
   encoder_position = ss.getEncoderPosition();  // Fetch the encoder position
-  encoder_color = Wheel((encoder_position) & 255);
 
-  if(encoder_position>320-106) {
-    encoder_position = 320-106;
+  background_sprite.fillSprite(TFT_BLACK);
+
+  // move to button callback so only update sprite when changung
+  icon_sprite.drawBitmap(0, 0, cat_icon, 96, 96, Color24toRGB565(encoder_color), TFT_BLACK);
+  neokey.read();
+
+  if(encoder_position>320-96) {
+    encoder_position = 320-96;
     ss.setEncoderPosition(encoder_position);
   }
 
@@ -143,19 +152,20 @@ void loop() {
     ss.setEncoderPosition(encoder_position);
   }
 
-  background_sprite.fillSprite(TFT_BLACK);
-  // background_sprite.fillCircle(encoder_position, 36, 30, Color24toRGB565(encoder_color));
-  rabbit_sprite.pushImage(0, 0, 96, 96, rabbit);
-  rabbit_sprite.pushToSprite(&background_sprite, encoder_position, 20, 0xFFFF); // Push sprite to screen.
+  encoder_color = Wheel((encoder_position) & 255);
+  icon_sprite.pushToSprite(&background_sprite, encoder_position, 0, TFT_BLACK);
 
-  // background_sprite.fillCircle(encoder_position, 36, 30, encoder_color);
-  txt_sprite.setFreeFont(FREE_FONT);
-  txt_sprite.setTextColor(TFT_WHITE, TFT_BLACK);
-  txt_sprite.drawString("LEAF", 0, 0);
+  icon_sprite.pushToSprite(&background_sprite, encoder_position + 100, 0, TFT_BLACK);
+
   txt_sprite.pushToSprite(&background_sprite, 20, 20, TFT_BLACK); // Push sprite to screen.
-  background_sprite.pushSprite(0,0);
+  background_sprite.pushSprite(0, 0);
 
-  j++;          // make colors cycle
+  // background_sprite.fillSprite(TFT_BLACK);
+  // // background_sprite.fillCircle(encoder_position, 36, 30, Color24toRGB565(encoder_color));
+  // icon_sprite.pushToSprite(&background_sprite, encoder_position, 60); // Push sprite to screen.
+  // background_sprite.pushSprite(0,0);
+
+  // j++;          // make colors cycle
 }
 
 /******************************************/

@@ -187,7 +187,7 @@
  .pio/libdeps/lilygo-t-display-s3/Adafruit\ BusIO/Adafruit_I2CDevice.h \
  .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/seesaw_neopixel.h \
  .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/seesaw_neopixel.h \
- include/Free_Fonts.h include/rabbit.h \
+ include/Free_Fonts.h include/cat_icon.h \
  .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/TFT_eSPI.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src/SPI.h \
