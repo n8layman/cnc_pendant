@@ -180,15 +180,7 @@
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/esp_hw_support/include/soc/esp32/spiram.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
- /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src/Wire.h \
- /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h \
- .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/Adafruit_NeoKey_1x4.h \
- .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/Adafruit_seesaw.h \
- .pio/libdeps/lilygo-t-display-s3/Adafruit\ BusIO/Adafruit_I2CDevice.h \
- .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/seesaw_neopixel.h \
- .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/seesaw_neopixel.h \
- include/Free_Fonts.h include/cat_icon.h \
- .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/TFT_eSPI.h \
+ include/display.h .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/TFT_eSPI.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src/SPI.h \
  /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-spi.h \
@@ -289,4 +281,12 @@
  .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/Fonts/Custom/Yellowtail_32.h \
  .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/Extensions/Smooth_font.h \
  .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/Extensions/Button.h \
- .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/Extensions/Sprite.h
+ .pio/libdeps/lilygo-t-display-s3/TFT_eSPI/Extensions/Sprite.h \
+ include/Free_Fonts.h include/cat_icon.h include/input.h \
+ /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src/Wire.h \
+ /Users/nathanlayman/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h \
+ .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/seesaw_neopixel.h \
+ .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/Adafruit_seesaw.h \
+ .pio/libdeps/lilygo-t-display-s3/Adafruit\ BusIO/Adafruit_I2CDevice.h \
+ .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/Adafruit_NeoKey_1x4.h \
+ .pio/libdeps/lilygo-t-display-s3/Adafruit\ seesaw\ Library/seesaw_neopixel.h
