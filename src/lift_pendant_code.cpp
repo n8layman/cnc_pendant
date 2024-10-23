@@ -82,10 +82,9 @@ void setup() {
   // background_sprite.setColorDepth(4);
   background_sprite.createSprite(320, 240);
 
-  txt_sprite.createSprite(160, 96);
-  txt_sprite.setFreeFont(FREE_FONT);
-  txt_sprite.setTextColor(TFT_WHITE, TFT_BLACK);
-  txt_sprite.drawString("LEAF", 0, 0);
+  // txt_sprite.createSprite(160, 96);
+  background_sprite.setFreeFont(FREE_FONT);
+  background_sprite.setTextColor(TFT_WHITE, TFT_BLACK);
 
   // icon_sprite.setColorDepth(4);
   icon_sprite.createSprite(96, 96);
@@ -137,6 +136,8 @@ void loop() {
   encoder_position = ss.getEncoderPosition();  // Fetch the encoder position
 
   background_sprite.fillSprite(TFT_BLACK);
+  background_sprite.setTextDatum(MC_DATUM);
+  background_sprite.drawString(String(encoder_position), tft.width() / 2, tft.height() / 2);
 
   // move to button callback so only update sprite when changung
   icon_sprite.drawBitmap(0, 0, cat_icon, 96, 96, Color24toRGB565(encoder_color), TFT_BLACK);
