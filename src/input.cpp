@@ -17,6 +17,7 @@ bool metric = false;
 byte buttownRow1 =  B0101;  // Buttons 3, 2, 1, 0 
 byte buttownRow2 =  B0101;  // Buttons 7, 6, 5, 4 
 byte buttonMode = buttownRow1 | (buttownRow2 << 4); // Combined button mode
+byte buttonState = 0;
 
 void input_init() {
     

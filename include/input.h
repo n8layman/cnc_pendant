@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include <Wire.h>
+#include <TFT_eSPI.h>
 #include <seesaw_neopixel.h>
 #include <Adafruit_NeoKey_1x4.h>
 
