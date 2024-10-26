@@ -1,37 +1,18 @@
 #ifndef ICON_H
 #define ICON_H
 
-#include <TFT_eSPI.h>  // Include TFT_eSPI library for TFT functionality
+#include "drawable.h"
 
-class Icon {
+class Icon : public Drawable {
 public:
-    // Public members for height and width
-    int width;   // Width of the icon
-    int height;  // Height of the icon
+    Icon(int x, int y, int width, int height, const uint16_t *bitmap)
+        : Drawable(x, y), width(width), height(height), bitmap(bitmap) {}  // Call base constructor
 
-    // Constructor to initialize the icon with specified bitmap, height, and width
-    Icon(TFT_eSPI &tft, const uint8_t *bitmap, int w, int h);
-
-    // Helper to initialize the sprite
-    void initializeSprite();
-    
-    // Overload the function call operator to return the sprite reference
-    TFT_eSprite& operator()();
-
-    // Overloaded method to draw the icon with a custom color for color icons
-    void recolor(uint16_t fgcolor, uint16_t bgcolor = TFT_BLACK);
-
-    // Private method to set byte swapping
-    void setSwapBytes(bool swap);
-
-    // Convert 24-bit color to RGB565
-    uint16_t Color24toRGB565(int32_t color); 
+    void drawOnSprite(TFT_eSprite *sprite) override;
 
 private:
-
-    TFT_eSprite sprite;         // The sprite used for the icon
-    const uint8_t *iconBitmap; // Pointer to the bitmap data
-
+    int width, height;          // Width and height of the icon
+    const uint16_t *bitmap;     // Pointer to bitmap data for the icon
 };
 
-#endif // ICON_H
+#endif

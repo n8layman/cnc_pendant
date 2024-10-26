@@ -11,56 +11,33 @@
 
 // Global sprites for display
 TFT_eSPI tft = TFT_eSPI(); 
-TFT_eSprite background_sprite = TFT_eSprite(&tft);
-// TFT_eSprite cat_sprite = TFT_eSprite(&tft);
-Icon cat(tft, cat_icon, 96, 96);
+Display display(&tft, 240, 320);  // Example screen dimensions
 
 void setup() {
 
   // General setup
   Serial.begin(115200);
 
-  // Set up display
-    tft.init();
-    tft.setRotation(1);
+  tft.init();
+  tft.setRotation(1);
 
-    // Initialize background sprite
-    background_sprite.createSprite(320, 240);
-    background_sprite.setFreeFont(FREE_FONT);
-    background_sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  // Add elements with unique IDs
+  display.addIcon("wifiIcon", 10, 10, 16, 16, wifiBitmap);    // Add WiFi icon
+  display.addText("welcomeText", 50, 50, "Hello World!", TFT_WHITE);  // Add text element
 
-    // cat_sprite.createSprite(96,96);
-    // cat_sprite.drawBitmap(0, 0, cat_icon, 96, 96, TFT_GREEN, TFT_BLACK);
-
-    cat.recolor(TFT_GREEN);
-
-    // Set up input
-    // input_init();
+  // Initial render
+  display.render();
 }
 
 // Main loop should update display but everything to do with button
 // and encoder states should be handled with interrupts
 void loop() {
 
-    background_sprite.fillSprite(TFT_BLACK);
-    // cat_sprite.pushToSprite(&background_sprite, 20, 20);
-    cat().pushToSprite(&background_sprite, 20, 20);
-    background_sprite.pushSprite(0, 0);
+    // Update the text element with ID "welcomeText"
+    display.updateText("welcomeText", "Updated Text!");
 
-  // int32_t encoder_position = input_get_encoder_position();  // Fetch the encoder position
+    // Refresh display contents
+    display.render();
 
-  // background_sprite.fillSprite(TFT_BLACK);
-  // background_sprite.setTextDatum(MC_DATUM);
-  // background_sprite.drawString(String(encoder_position), tft.width() / 2, tft.height() / 2);
-
-  // // move to button callback so only update sprite when changung
-  // icon_sprite.drawBitmap(0, 0, cat_icon, 96, 96, Color24toRGB565(encoder_color), TFT_BLACK);
-  // neokey.read();
-
-  // encoder_color = Wheel((encoder_position) & 255);
-  // txt_sprite.pushToSprite(&background_sprite, 20, 20, TFT_BLACK); // Push sprite to screen.
-
-  // icon_sprite.pushToSprite(&background_sprite, (encoder_position % (340 + 96)) - 96, 0, TFT_BLACK);
-  // icon_sprite.pushToSprite(&background_sprite, ((encoder_position + 120 + 96) % (340 + 96)) - 96, 0, TFT_BLACK);
-  // background_sprite.pushSprite(0, 0);
+    delay(100);  // Control the refresh rate
 }
