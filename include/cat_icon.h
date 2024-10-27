@@ -1,6 +1,6 @@
 // https://notisrac.github.io/FileToCArray/
-#define CAT_ICON_9696_HEIGHT 96
-#define CAT_ICON_9696_WIDTH 96
+#define CAT_ICON_HEIGHT 96
+#define CAT_ICON_WIDTH 96
 
 // array size is 1152
 static const uint8_t cat_icon[] PROGMEM  = {
